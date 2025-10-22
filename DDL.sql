@@ -16,7 +16,7 @@ CREATE TABLE Genres (
 CREATE TABLE Authors(
   author_id INT AUTO_INCREMENT NOT NULL UNIQUE,
   author_name VARCHAR(45) NOT NULL,
-  PRIMARY KEY (author_id),
+  PRIMARY KEY (author_id)
   ) ENGINE = InnoDB;
 
 CREATE TABLE BookOrders(
@@ -27,7 +27,7 @@ CREATE TABLE BookOrders(
   PRIMARY KEY (book_order_id),
   FOREIGN KEY (order_id) REFERENCES Orders(order_id),
   FOREIGN KEY (book_id) REFERENCES Books(book_id)
-  ) ENGINE = InnoD;
+  ) ENGINE = InnoDB;
 
 CREATE TABLE BookGenres (
     book_genre_id INT AUTO_INCREMENT NOT NULL,
@@ -41,11 +41,11 @@ CREATE TABLE BookGenres (
 DROP TABLE IF EXISTS Members;
 CREATE TABLE Members(
     member_id INT AUTO_INCREMENT NOT NULL, 
-    first_name VARCHAR[45] NOT NULL,
-    last_name VARCHAR[45] NOT NULL,
-    address VARCHAR[145] NOT NULL,
-    email VARCHAR[145], 
-    phone_number char[10],
+    first_name VARCHAR(45) NOT NULL,
+    last_name VARCHAR(45) NOT NULL,
+    address VARCHAR(145) NOT NULL,
+    email VARCHAR(145), 
+    phone_number char(10),
     fee_total FLOAT NOT NULL,
     PRIMARY KEY (member_id)
 );
@@ -53,7 +53,7 @@ CREATE TABLE Members(
 DROP TABLE IF EXISTS Orders;
 CREATE TABLE Orders(
     order_id INT AUTO_INCREMENT NOT NULL, 
-    member_id NOT NULL, 
+    member_id INT NOT NULL, 
     order_date DATE NOT NULL, 
     due_date DATE NOT NULL, 
     FOREIGN KEY (member_id) REFERENCES Members(member_id),
@@ -63,8 +63,8 @@ CREATE TABLE Orders(
 DROP TABLE IF EXISTS BookAuthors;
 CREATE TABLE BookAuthors(
     book_author_id INT AUTO_INCREMENT NOT NULL, 
-    book_id NOT NULL, 
-    author_id NOT NULL, 
+    book_id INT NOT NULL, 
+    author_id INT NOT NULL, 
     FOREIGN KEY (book_id) REFERENCES Books(book_id), 
     FOREIGN KEY (author_id) REFERENCES Authors(author_id), 
     PRIMARY KEY (book_author_id)
