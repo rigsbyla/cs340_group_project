@@ -99,7 +99,7 @@ VALUES
     (7,7),
     (8,3);
 
-INSERT INTO Books(book_id, title, call_num, qunatity)
+INSERT INTO Books(book_id, title, call_num, quantity)
 VALUES 
   (1, 'The Rangers of the North: A New beginning', 'CF4362', 4),
   (2, 'The Rangers of the North: A Kingdom in Peril', 'CF4367', 5),
