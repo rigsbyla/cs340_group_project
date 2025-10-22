@@ -19,6 +19,16 @@ CREATE TABLE Authors(
   PRIMARY KEY (author_id),
   ) ENGINE = InnoDB;
 
+CREATE TABLE BookOrders(
+  book_order_id INT AUTO_INCREMENT NOT NULL,
+  order_id INT NOT NULL,
+  book_id INT NOT NULL,
+  quantity INT NOT NULL,
+  PRIMARY KEY (book_order_id),
+  FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+  FOREIGN KEY (book_id) REFERENCES Books(book_id)
+  );
+  
 INSERT INTO Books(book_id, title, call_num, qunatity)
 VALUES 
   (1, 'The Rangers of the North: A New beginning', 'CF4362', 4),
@@ -49,3 +59,14 @@ VALUES
   (5, 'Samuel Chen'),
   (6, 'Jackson Smith'),
   (7, 'Jeremiah Brown');
+
+INSERT INTO BookOrders(book_order_id, order_id, book_id, quantity)
+VALUES
+  (1, 1, 2, 1),
+  (2, 1, 4, 1),
+  (3, 2, 1, 3),
+  (4, 3, 6, 1),
+  (5, 3, 7, 2),
+  (6, 3, 8, 1),
+  (7, 4, 2, 1),
+  (8, 5, 2, 1);
