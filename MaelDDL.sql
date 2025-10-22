@@ -6,12 +6,18 @@ CREATE TABLE Books(
   quantity INT NOT NULL,
   PRIMARY KEY (book_id)
   ) ENGINE = InnoDB;
+
 CREATE TABLE Genres (
   genre_id INT AUTO_INCREMENT NOT NULL,
   genre_name VARCHAR(45) NOT NULL,
   PRIMARY KEY (genre_id)
   ) ENGINE = InnoDB;
 
+CREATE TABLE Authors(
+  author_id INT AUTO_INCREMENT NOT NULL UNIQUE,
+  author_name VARCHAR(45) NOT NULL,
+  PRIMARY KEY (author_id),
+  ) ENGINE = InnoDB;
 
 INSERT INTO Books(book_id, title, call_num, qunatity)
 VALUES 
@@ -33,3 +39,13 @@ VALUES
   (5, 'Textbook'),
   (6, 'Science Fiction'),
   (7, 'Music');
+
+INSERT INTO Authors(author_id, author_name)
+VALUES 
+  (1, 'John Walton'),
+  (2, 'Jessica Vanderbin'),
+  (3, 'Alexandra Gobs'),
+  (4, 'Romero Gonzales'),
+  (5, 'Samuel Chen'),
+  (6, 'Jackson Smith'),
+  (7, 'Jeremiah Brown');
