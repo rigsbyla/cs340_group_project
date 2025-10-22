@@ -27,7 +27,16 @@ CREATE TABLE BookOrders(
   PRIMARY KEY (book_order_id),
   FOREIGN KEY (order_id) REFERENCES Orders(order_id),
   FOREIGN KEY (book_id) REFERENCES Books(book_id)
-  );
+  ) ENGINE = InnoD;
+
+CREATE TABLE BookGenres (
+    book_genre_id INT AUTO_INCREMENT NOT NULL,
+    book_id INT NOT NULL,
+    genre_id INT NOT NULL,
+    PRIMARY KEY (book_genre_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id),
+    FOREIGN KEY (genre_id) REFERENCES Genres(genre_id)
+) ENGINE = InnoDB;
   
 INSERT INTO Books(book_id, title, call_num, qunatity)
 VALUES 
@@ -70,3 +79,16 @@ VALUES
   (6, 3, 8, 1),
   (7, 4, 2, 1),
   (8, 5, 2, 1);
+
+INSERT INTO BookGenres(book_genre_id, book_id, genre_id) 
+VALUES
+  (1, 1, 1),
+  (2, 2, 1),
+  (3, 3, 2),
+  (4, 3, 4),
+  (5, 4, 2),
+  (6, 4, 4),
+  (7, 5, 5),
+  (8, 6, 3),
+  (9, 7, 2),
+  (10, 8, 3);
