@@ -50,7 +50,7 @@ CREATE TABLE Orders(
     due_date DATE NOT NULL, 
     FOREIGN KEY (member_id) REFERENCES Members(member_id),
     PRIMARY KEY (order_id)
-);
+)ENGINE = InnoDB;
 
 CREATE TABLE BookAuthors(
     book_author_id INT AUTO_INCREMENT NOT NULL UNIQUE, 
@@ -59,7 +59,7 @@ CREATE TABLE BookAuthors(
     FOREIGN KEY (book_id) REFERENCES Books(book_id), 
     FOREIGN KEY (author_id) REFERENCES Authors(author_id), 
     PRIMARY KEY (book_author_id)
-);
+)ENGINE = InnoDB;
 
 CREATE TABLE BookGenres (
     book_genre_id INT AUTO_INCREMENT NOT NULL UNIQUE,
