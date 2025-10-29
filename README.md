@@ -1,10 +1,10 @@
-Make the template-
-Member page
-Books
-Transactions
-- check out book page
+-Make the template-
+-Member page
+-Books
+-Transactions
+-- check out book page
   
 
 
-Stretch Goals
+-Stretch Goals
 - look up by author or genre
