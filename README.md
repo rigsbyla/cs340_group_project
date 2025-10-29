@@ -1,4 +1,4 @@
--Make the template-LR
+-Make the template-LR DONE
 -Member page- LR
 -Books- MP
 -Transactions
