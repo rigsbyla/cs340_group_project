@@ -35,7 +35,7 @@ app.get('/', async function (req, res) {
 app.get('/books', async function (req, res) {
     try {
         // Create and execute our queries
-        const query1 = 'SELECT * FROM books;';
+        const query1 = 'SELECT * FROM Books;';
         const [books] = await db.query(query1);
         
         res.render('books', {books: books}); // Render the home.hbs file
