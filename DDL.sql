@@ -39,7 +39,7 @@ CREATE TABLE Members(
   address VARCHAR(145) NOT NULL,
   email VARCHAR(145), 
   phone_number char(10),
-  fee_total FLOAT NOT NULL,
+  fee_total FLOAT NOT NULL DEFAULT 0,
   PRIMARY KEY (member_id)
 );
 
