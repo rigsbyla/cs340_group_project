@@ -1,0 +1,104 @@
+<h1>Books Checked Out</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            <th>Order ID</th>
+            <th>Member</th>
+            <th>Date Checked Out</th>
+            <th>Due Date</th>
+            
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the id, first_name, last_name, homeworld and age }}
+        {{#each orders}}
+        <tr>
+            <td>{{this.order_id}}</td>
+            <td>{{this.member_id}}</td>
+            <td>{{this.order_date}}</td>
+            <td>{{this.due_date}}</td>
+            
+
+            {{! DELETE form }}
+            <form id='delete_person_form' 
+                onsubmit="return confirm('Are you sure you want to delete {{this.first_name}} {{this.last_name}}?')">
+              
+                <input type='hidden' name='delete_person_id' value='{{this.member_id}}' />
+                <input type='hidden' name='delete_person_name' value='{{this.first_name}} {{this.last_name}}' />
+                <td>
+                    <button type='submit'>
+                        Check In
+                    </button>
+                   
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Check Out a Book</h2>
+<form class='cuForm' id='create_person_form'>
+    <label for='create_person_first_name'>First Name: </label>
+    <input type='text' name='create_person_first_name' id='create_person_first_name' required />
+
+    <label for='create_person_last_name'>Last Name: </label>
+    <input type='text' name='create_person_last_name' id='create_person_last_name' />
+
+    <label for='create_person_address'>Address: </label>
+    <input type='text' name='create_person_address' id='create_person_address' />
+
+    <label for='create_person_email'>Email: </label>
+    <input type='email' name='create_person_email' id='create_person_email' />  
+
+    <label for='create_person_phone_number'>Phone Number: </label>
+    <input type='text' name='create_person_phone_number' id='create_person_phone_number' />
+
+
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Person</h2>
+<form class='cuForm' id='update_person_form'>
+    <label for='update_person_id'>Person to Update: </label>
+    <select name='update_person_id' id='update_person_id' required>
+        <option value='' disabled selected>Select a Person</option>
+        {{#each people}}
+        <option value='{{this.member_id}}' required>
+            {{this.member_id}}
+            -
+            {{this.first_name}}
+            {{this.last_name}}
+        </option>
+        {{/each}}
+    </select>
+
+   <label for='update_person_first_name'>First Name: </label>
+    <input type='text' name='update_person_first_name' id='update_person_first_name' />
+
+    <label for='update_person_last_name'>Last Name: </label>
+    <input type='text' name='update_person_last_name' id='update_person_last_name' />
+
+    <label for='update_person_address'>Address: </label>
+    <input type='text' name='update_person_address' id='update_person_address' />
+
+    <label for='update_person_email'>Email: </label>
+    <input type='email' name='update_person_email' id='update_person_email' />
+
+    <label for='update_person_phone_number'>Phone Number: </label>
+    <input type='text' name='update_person_phone_number' id='update_person_phone_number' />
+
+    <label for='update_person_fee_total'>Fee Total: </label>
+    <input type='number' step='0.01' name='update_person_fee_total' id='update_person_fee_total' />
+
+
+    <input type='submit' />
+</form> 
