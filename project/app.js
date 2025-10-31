@@ -34,9 +34,11 @@ app.get('/', async function (req, res) {
 
 app.get('/books', async function (req, res) {
     try {
-
+        // Create and execute our queries
+        const query1 = 'SELECT * FROM books;';
+        const [books] = await db.query(query1);
         
-        res.render('books'); // Render the home.hbs file
+        res.render('books', {books: books}); // Render the home.hbs file
     } catch (error) {
         console.error('Error rendering page:', error);
         // Send a generic error message to the browser
