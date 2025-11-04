@@ -1,5 +1,7 @@
-<h1>Library Members</h1>
-
+<h1>
+<img src="/images/student.png" alt="Members Icon" style="width:50px; height:auto;">
+    Library Members
+</h1>
 {{! READ table }}
 <table>
     <thead>
@@ -47,28 +49,11 @@
     </tbody>
 </table>
 
-{{! CREATE form }}
-<h2>Create a Person</h2>
-<form class='cuForm' id='create_person_form'>
-    <label for='create_person_first_name'>First Name: </label>
-    <input type='text' name='create_person_first_name' id='create_person_first_name' required />
-
-    <label for='create_person_last_name'>Last Name: </label>
-    <input type='text' name='create_person_last_name' id='create_person_last_name' />
-
-    <label for='create_person_address'>Address: </label>
-    <input type='text' name='create_person_address' id='create_person_address' />
-
-    <label for='create_person_email'>Email: </label>
-    <input type='email' name='create_person_email' id='create_person_email' />  
-
-    <label for='create_person_phone_number'>Phone Number: </label>
-    <input type='text' name='create_person_phone_number' id='create_person_phone_number' />
-
-
-
-    <input type='submit' />
-</form>
+{{! New Member Button }}
+<br><br>
+<button onclick="window.location.href='/members-new';">
+    Add a New Member
+</button>
 
 {{! UPDATE form }}
 <h2>Update a Person</h2>

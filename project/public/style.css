@@ -39,3 +39,13 @@ a {
 .homepageDescription {
     margin-left: 32px;
 }
+
+.cuForm label {
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+}
+
+#submit_button {
+    margin-left: 162px;
+}
