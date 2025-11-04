@@ -37,7 +37,7 @@
                 <input type='hidden' name='delete_person_id' value='{{this.member_id}}' />
                 <input type='hidden' name='delete_person_name' value='{{this.first_name}} {{this.last_name}}' />
                 <td>
-                    <button type='submit'>
+                    <button type='submit' id='change_button'>
                         Check In
                     </button>
                    
@@ -48,6 +48,6 @@
     </tbody>
 </table>
 <br><br>
-<button onclick="window.location.href='/orders-new';">
+<button onclick="window.location.href='/orders-new';" id = 'add_button'>
     Check Out New Books
 </button>
