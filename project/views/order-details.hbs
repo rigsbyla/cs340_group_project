@@ -9,7 +9,7 @@
             <th>Order ID</th>
             <th>Book Title</th>
             <th>Quantity</th>
-            <th>Member ID</th>
+            <th>Checked Out To</th>
             
             <th></th>
          
@@ -24,7 +24,7 @@
             <td>{{this.order_id}}</td>
             <td>{{this.book_title}}</td>
             <td>{{this.quantity}}</td>
-            <td>{{this.member_id}}</td>
+            <td>{{this.member_name}}</td>
 
            
             {{! DELETE form }}
@@ -44,3 +44,7 @@
         {{/each}}
     </tbody>
 </table>
+<br><br>
+<button onclick="window.location.href='/orders-new';">
+    Check Out New Books
+</button>
