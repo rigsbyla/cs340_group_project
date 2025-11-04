@@ -160,6 +160,56 @@ app.get('/order-details', async function (req, res) {
     }
 });
 
+app.get('/bookorders-new', async function (req, res) {
+    try {
+        const query1 = 'SELECT member_id, first_name, last_name FROM Members;';
+        const [members] = await db.query(query1);
+
+        const query2 = 'SELECT book_id, title, quantity FROM Books;';
+        const [books] = await db.query(query2);
+        
+        res.render('bookorders-new', { members: members, books: books}); // Render the home.hbs file
+    }
+    catch (error) {
+        console.error('Error rendering page:', error);
+        // Send a generic error message to the browser
+        res.status(500).send('An error occurred while rendering the page.');
+    }
+});
+app.post('/bookorders-new', async function (req, res) {
+    const connection = await db.getConnection();
+    
+    try {
+        await connection.beginTransaction();
+        
+        const { member_id, order_date, due_date, book_id, quantity } = req.body;
+        
+        // Insert into Orders table
+        const orderQuery = 'INSERT INTO Orders (member_id, order_date, due_date) VALUES (?, ?, ?)';
+        const [orderResult] = await connection.query(orderQuery, [member_id, order_date, due_date]);
+        const orderId = orderResult.insertId;
+        
+        // Insert each book into BookOrders table
+        const bookIds = Array.isArray(book_id) ? book_id : [book_id];
+        const quantities = Array.isArray(quantity) ? quantity : [quantity];
+        
+        for (let i = 0; i < bookIds.length; i++) {
+            const bookOrderQuery = 'INSERT INTO BookOrders (order_id, book_id, quantity) VALUES (?, ?, ?)';
+            await connection.query(bookOrderQuery, [orderId, bookIds[i], quantities[i]]);
+        }
+        
+        await connection.commit();
+        res.status(201).json({ message: 'Order created successfully', order_id: orderId });
+        
+    } catch (error) {
+        await connection.rollback();
+        console.error('Error creating order:', error);
+        res.status(500).json({ error: 'An error occurred while creating the order.' });
+    } finally {
+        connection.release();
+    }
+});
+
 // ########################################
 // ########## LISTENER
 
