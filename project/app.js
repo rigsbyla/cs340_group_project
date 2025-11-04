@@ -82,6 +82,23 @@ app.get('/members', async function (req, res) {
     }
 });
 
+app.get('/members-new', async function (req, res) {
+    try {
+        // Create and execute our queries
+        const query1 = `SELECT * FROM Members;`;
+        const [people] = await db.query(query1);
+
+        res.render('members-new', { people: people });
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
+
 
 app.get('/orders', async function (req, res) {
     try {
