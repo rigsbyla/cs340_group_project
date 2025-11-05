@@ -38,8 +38,8 @@ CREATE TABLE Members(
   last_name VARCHAR(45) NOT NULL,
   address VARCHAR(145) NOT NULL,
   email VARCHAR(145), 
-  phone_number VARCHAR(15),
-  fee_total FLOAT NOT NULL DEFAULT 0,
+  phone_number char(10),
+  fee_total DECIMAL(10,2) NOT NULL DEFAULT 0,
   PRIMARY KEY (member_id)
 );
 
