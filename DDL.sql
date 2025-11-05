@@ -16,7 +16,8 @@ CREATE TABLE Books(
   title VARCHAR(145) NOT NULL,
   call_num CHAR(6),
   quantity INT NOT NULL,
-  PRIMARY KEY (book_id)
+  PRIMARY KEY (book_id),
+  ON DELETE SET NULL
   ) ENGINE = InnoDB;
 
 CREATE TABLE Genres (
@@ -40,7 +41,8 @@ CREATE TABLE Members(
   email VARCHAR(145), 
   phone_number VARCHAR(15),
   fee_total FLOAT NOT NULL DEFAULT 0,
-  PRIMARY KEY (member_id)
+  PRIMARY KEY (member_id),
+  ON DELETE SET NULL
 );
 
 CREATE TABLE Orders(
@@ -77,7 +79,8 @@ CREATE TABLE BookOrders(
   quantity INT NOT NULL,
   PRIMARY KEY (book_order_id),
   FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-  FOREIGN KEY (book_id) REFERENCES Books(book_id)
+  FOREIGN KEY (book_id) REFERENCES Books(book_id),
+  ON DELETE SET NULL
   ) ENGINE = InnoDB;
 
 INSERT INTO Books(book_id, title, call_num, quantity)
