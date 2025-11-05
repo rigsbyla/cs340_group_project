@@ -16,7 +16,8 @@ CREATE TABLE Books(
   title VARCHAR(145) NOT NULL,
   call_num CHAR(6),
   quantity INT NOT NULL,
-  PRIMARY KEY (book_id)
+  PRIMARY KEY (book_id),
+  ON DELETE SET NULL
   ) ENGINE = InnoDB;
 
 CREATE TABLE Genres (
@@ -81,10 +82,8 @@ CREATE TABLE BookOrders(
   book_id INT,
   quantity INT NOT NULL,
   PRIMARY KEY (book_order_id),
-  FOREIGN KEY (order_id) REFERENCES Orders(order_id)
-  ON DELETE SET NULL,
+  FOREIGN KEY (order_id) REFERENCES Orders(order_id),
   FOREIGN KEY (book_id) REFERENCES Books(book_id)
-  ON DELETE SET NULL
   ) ENGINE = InnoDB;
 
 -- Data entries inserted into respective tables
