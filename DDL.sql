@@ -89,7 +89,7 @@ VALUES
   (5, 'Introduction to Calculus', 'MT5721', 6),
   (6, 'Car Owners Guide for Toyota Corolla 2004', 'EG0082', 1),
   (7, 'Atlas of the World', 'GE4012', 2),
-  (8, 'Dinosaurs!', 'SC552', 2);
+  (8, 'Dinosaurs!', 'SC5520', 2);
 
 INSERT INTO Genres(genre_id, genre_name)
 VALUES
