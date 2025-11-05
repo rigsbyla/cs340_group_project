@@ -83,6 +83,7 @@ CREATE TABLE BookOrders(
   ON DELETE SET NULL
   ) ENGINE = InnoDB;
 
+-- Data entries inserted into respective tables
 INSERT INTO Books(book_id, title, call_num, quantity)
 VALUES 
   (1, 'The Rangers of the North: A New beginning', 'CF4362', 4),
