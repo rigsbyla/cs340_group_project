@@ -15,7 +15,21 @@ SELECT BookOrders.book_order_id,
         BookOrders.order_id, 
         Books.title AS book_title, 
         BookOrders.quantity, 
-        Orders.member_id AS member_id
+        CONCAT(Members.first_name , ' ', Members.last_name) AS member_name
         FROM BookOrders
         INNER JOIN Books ON BookOrders.book_id = Books.book_id
-        INNER JOIN Orders ON BookOrders.order_id = Orders.member_id;
+        INNER JOIN Orders ON BookOrders.order_id = Orders.member_id
+        LEFT JOIN Members ON Members.member_id = Orders.member_id;
+
+-- Get all books
+SELECT * FROM Books; 
+
+--Get information about books for book orders
+SELECT book_id, title, quantity FROM Books;
+
+-- Insert new orders
+INSERT INTO Orders (member_id, order_date, due_date) VALUES (?, ?, ?);
+
+-- Insert new book orders
+INSERT INTO BookOrders (order_id, book_id, quantity) VALUES (?, ?, ?);
+
