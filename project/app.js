@@ -20,6 +20,10 @@ app.set('view engine', '.hbs'); // Use handlebars engine for *.hbs files.
 
 // ########################################
 // ########## ROUTE HANDLERS
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.originalUrl}`);
+  next();
+});
 
 // READ ROUTES
 app.get('/', async function (req, res) {
@@ -80,6 +84,31 @@ app.get('/members-new', async function (req, res) {
         );
     }
 });
+
+app.post('/members-new', async function (req, res) {
+    try {
+        const { create_person_first_name, create_person_last_name, create_person_address, create_person_email, create_person_phone_number } = req.body;
+
+        await db.execute(
+            `INSERT INTO Members (first_name, last_name, address, email, phone_number)
+            VALUES (?, ?, ?, ?, ?)`,
+            [
+                create_person_first_name,
+                create_person_last_name,
+                create_person_address,
+                create_person_email,
+                create_person_phone_number
+            ]
+    );
+        res.redirect('/members');
+
+    } catch (error) {
+        console.error('Error inserting member:', error);
+        res.status(500).send('An error occurred while inserting the member.');
+    }
+});
+
+        
 
 app.get('/member-update', async function (req, res) {
     try {
@@ -209,6 +238,7 @@ app.post('/bookorders-new', async function (req, res) {
         connection.release();
     }
 });
+
 
 // ########################################
 // ########## LISTENER

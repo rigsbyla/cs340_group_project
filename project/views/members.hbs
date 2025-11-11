@@ -2,6 +2,11 @@
 <img src="/images/student.png" alt="Members Icon" style="width:50px; height:auto;">
     Library Members
 </h1>
+
+<button onclick="window.location.href='/members-new';" id = 'add_button'>
+    Add a New Member
+</button> 
+<br><br>
 {{! READ table }}
 <table>
     <thead>
@@ -49,12 +54,10 @@
     </tbody>
 </table>
 
-{{! New Member Button }}
 <br><br>
-<button onclick="window.location.href='/members-new';" id = 'add_button'>
-    Add a New Member
-</button>
+
 
 <button onclick="window.location.href='/member-update';" id = 'change_button'>
     Update Member Information
 </button>
+
