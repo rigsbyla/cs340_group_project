@@ -23,7 +23,9 @@ All Books
             <td>{{this.call_num}}</td>
             <td>{{this.quantity}}</td>
             {{! DELETE form }}
-            <form id='delete_book_form'>
+            <form id='delete_book_form' method='POST' action='/books-delete'
+                onsubmit="return confirm('Are you sure you want to delete {{this.title}}?')">
+
                 <input type='hidden' name='delete_book_id' value='{{this.book_id}}' />
                 <input type='hidden' name='delete_book_title' value='{{this.title}}' />
                 <td>
