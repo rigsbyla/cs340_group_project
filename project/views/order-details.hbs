@@ -51,11 +51,21 @@
 
            
             {{! DELETE form }}
-            <form id='delete_person_form' 
-                onsubmit="return confirm('Are you sure you want to delete {{this.first_name}} {{this.last_name}}?')">
+            <form id='delete_person_form'  method='POST' action='/book-order-delete'
+                onsubmit="return confirm('Are you sure {{this.member_name}} wants to check in {{this.book_title}}?')">
               
-                <input type='hidden' name='delete_person_id' value='{{this.member_id}}' />
-                <input type='hidden' name='delete_person_name' value='{{this.first_name}} {{this.last_name}}' />
+                <input type='hidden' name='delete_book_order_id' value='{{this.book_order_id}}' />
+                <td>
+                    <button type='submit' id='change_button'>
+=======
+            <td>{{this.member_id}}</td>
+
+           
+            {{! DELETE form }}
+            <form id='delete_person_form'  method='POST' action='/book-order-delete'
+                onsubmit="return confirm('Are you sure {{this.member_name}} wants to check in {{this.book_title}}?')">
+              
+                <input type='hidden' name='delete_book_order_id' value='{{this.book_order_id}}' />
                 <td>
                     <button type='submit'>
 >>>>>>> 4359ccc (Made Book order pages)

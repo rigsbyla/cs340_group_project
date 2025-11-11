@@ -82,6 +82,20 @@ app.get('/members', async function (req, res) {
     }
 });
 
+app.post('/members-delete', async function (req, res) {
+    try {
+        const {delete_member_id} = req.body;
+        const [rows] = await db.query(
+            'CALL delete_member(?)',
+            [delete_member_id]           
+        );
+        res.redirect('/members');
+    } catch (error) {
+        console.error('Error deleting member:', error);
+        res.status(500).send('An error occurred while deleting the member.');
+    }
+});
+
 app.get('/members-new', async function (req, res) {
     try {
         // Create and execute our queries
@@ -250,6 +264,20 @@ app.post('/bookorders-new', async function (req, res) {
         res.status(500).json({ error: 'An error occurred while creating the order.' });
     } finally {
         connection.release();
+    }
+});
+
+app.post('/book-order-delete', async function (req, res) {
+    try {
+        const {delete_book_order_id} = req.body;
+        const [rows] = await db.query(
+            'CALL delete_book_order(?)',
+            [delete_book_order_id]           
+        );
+        res.redirect('/order-details');
+    } catch (error) {
+        console.error('Error deleting order:', error);
+        res.status(500).send('An error occurred while deleting the book.');
     }
 });
 
