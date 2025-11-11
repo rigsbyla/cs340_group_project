@@ -16,8 +16,7 @@ CREATE TABLE Books(
   title VARCHAR(145) NOT NULL,
   call_num CHAR(6),
   quantity INT NOT NULL,
-  PRIMARY KEY (book_id),
-  ON DELETE SET NULL
+  PRIMARY KEY (book_id)
   ) ENGINE = InnoDB;
 
 CREATE TABLE Genres (
@@ -41,45 +40,50 @@ CREATE TABLE Members(
   email VARCHAR(145), 
   phone_number VARCHAR(15),
   fee_total FLOAT NOT NULL DEFAULT 0,
-  PRIMARY KEY (member_id),
-  ON DELETE SET NULL
+  PRIMARY KEY (member_id)
 );
 
 CREATE TABLE Orders(
     order_id INT AUTO_INCREMENT NOT NULL UNIQUE, 
-    member_id INT NOT NULL, 
+    member_id INT, 
     order_date DATE NOT NULL, 
     due_date DATE NOT NULL, 
-    FOREIGN KEY (member_id) REFERENCES Members(member_id),
+    FOREIGN KEY (member_id) REFERENCES Members(member_id)
+    ON DELETE SET NULL,
     PRIMARY KEY (order_id)
 )ENGINE = InnoDB;
 
 CREATE TABLE BookAuthors(
     book_author_id INT AUTO_INCREMENT NOT NULL UNIQUE, 
-    book_id INT NOT NULL, 
-    author_id INT NOT NULL, 
-    FOREIGN KEY (book_id) REFERENCES Books(book_id), 
-    FOREIGN KEY (author_id) REFERENCES Authors(author_id), 
+    book_id INT, 
+    author_id INT, 
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
+    ON DELETE SET NULL, 
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id)
+    ON DELETE SET NULL, 
     PRIMARY KEY (book_author_id)
 )ENGINE = InnoDB;
 
 CREATE TABLE BookGenres (
     book_genre_id INT AUTO_INCREMENT NOT NULL UNIQUE,
-    book_id INT NOT NULL,
-    genre_id INT NOT NULL,
+    book_id INT,
+    genre_id INT,
     PRIMARY KEY (book_genre_id),
-    FOREIGN KEY (book_id) REFERENCES Books(book_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
+    ON DELETE SET NULL,
     FOREIGN KEY (genre_id) REFERENCES Genres(genre_id)
+    ON DELETE SET NULL
 ) ENGINE = InnoDB;
 
 CREATE TABLE BookOrders(
   book_order_id INT AUTO_INCREMENT NOT NULL UNIQUE,
-  order_id INT NOT NULL,
-  book_id INT NOT NULL,
+  order_id INT,
+  book_id INT,
   quantity INT NOT NULL,
   PRIMARY KEY (book_order_id),
-  FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-  FOREIGN KEY (book_id) REFERENCES Books(book_id),
+  FOREIGN KEY (order_id) REFERENCES Orders(order_id)
+  ON DELETE SET NULL,
+  FOREIGN KEY (book_id) REFERENCES Books(book_id)
   ON DELETE SET NULL
   ) ENGINE = InnoDB;
 
