@@ -1,3 +1,8 @@
+{{!-- Citation for use of AI Tools:
+Date: 11/11/25
+source: chatgpt.com
+prompt: create a pop up confirmation message for the database reset link. --}}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +20,7 @@
         <a href="/members">Members</a>
         <a href="/books">Books</a>
         <a href="/order-details">Books Checked Out</a>
+        <a href="#" id="resetDbLink" style="color:red;">Reset Database</a>
     </nav>
 
     {{{body}}}
@@ -26,3 +32,41 @@
     <a href="https://www.flaticon.com/free-icons/library" title="library icons">Library icons created by Smashicons - Flaticon</a>
 </footer>
 </html>
+
+
+<script>
+  (function () {
+    const link = document.getElementById('resetDbLink');
+    if (!link) return;
+
+    link.addEventListener('click', async (e) => {
+      e.preventDefault();
+
+      const confirmed = confirm(
+        'Really reset the database?\n\nThis will DROP and RECREATE tables, then seed data.'
+      );
+      if (!confirmed) return;
+
+      // disable while running
+      link.textContent = 'Resetting…';
+      link.style.pointerEvents = 'none';
+
+      try {
+        const res = await fetch('/api/reset-db', { method: 'POST' });
+        if (!res.ok) {
+          const msg = await res.text();
+          alert('Reset failed: ' + msg);
+        } else {
+          alert('✅ Database reset successful!');
+          // Optional: refresh current page data
+          window.location.reload();
+        }
+      } catch (err) {
+        alert('Reset failed: ' + (err?.message || err));
+      } finally {
+        link.textContent = '⚠️ Reset Database';
+        link.style.pointerEvents = 'auto';
+      }
+    });
+  })();
+</script>

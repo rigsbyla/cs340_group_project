@@ -240,6 +240,21 @@ app.post('/bookorders-new', async function (req, res) {
 });
 
 
+// Reset database for testing
+app.post('/api/reset-db', async (req, res) => {
+  try {
+    
+
+    await db.query('CALL load_librarydb();');
+    console.log('✅ Database reset successfully');
+    res.json({ ok: true });
+  } catch (error) {
+    console.error('❌ Error resetting database:', error);
+    res.status(500).json({ ok: false, error: 'Error resetting database.' });
+  }
+});
+
+
 // ########################################
 // ########## LISTENER
 
