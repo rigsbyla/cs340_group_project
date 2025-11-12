@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 <h1>
 <img src="/images/books (1).png" alt="Checked Out Books Icon" style="width:50px; height:auto;">
     Books Checked Out 
 </h1>
-=======
-<h1>Books Checked Out - Detail</h1>
->>>>>>> 4359ccc (Made Book order pages)
 
 {{! READ table }}
 <table>
@@ -16,11 +12,7 @@
             <th>Order ID</th>
             <th>Book Title</th>
             <th>Quantity</th>
-<<<<<<< HEAD
             <th>Checked Out To</th>
-=======
-            <th>Member ID</th>
->>>>>>> 4359ccc (Made Book order pages)
             
             <th></th>
          
@@ -35,7 +27,6 @@
             <td>{{this.order_id}}</td>
             <td>{{this.book_title}}</td>
             <td>{{this.quantity}}</td>
-<<<<<<< HEAD
             <td>{{this.member_name}}</td>
 
            
@@ -46,29 +37,6 @@
                 <input type='hidden' name='delete_book_order_id' value='{{this.book_order_id}}' />
                 <td>
                     <button type='submit' id='change_button'>
-=======
-            <td>{{this.member_id}}</td>
-
-           
-            {{! DELETE form }}
-            <form id='delete_person_form'  method='POST' action='/book-order-delete'
-                onsubmit="return confirm('Are you sure {{this.member_name}} wants to check in {{this.book_title}}?')">
-              
-                <input type='hidden' name='delete_book_order_id' value='{{this.book_order_id}}' />
-                <td>
-                    <button type='submit' id='change_button'>
-=======
-            <td>{{this.member_id}}</td>
-
-           
-            {{! DELETE form }}
-            <form id='delete_person_form'  method='POST' action='/book-order-delete'
-                onsubmit="return confirm('Are you sure {{this.member_name}} wants to check in {{this.book_title}}?')">
-              
-                <input type='hidden' name='delete_book_order_id' value='{{this.book_order_id}}' />
-                <td>
-                    <button type='submit'>
->>>>>>> 4359ccc (Made Book order pages)
                         Check In
                     </button>
                    
@@ -78,10 +46,7 @@
         {{/each}}
     </tbody>
 </table>
-<<<<<<< HEAD
 <br><br>
 <button onclick="window.location.href='/bookorders-new';" id = 'add_button'>
     Check Out New Books
 </button>
-=======
->>>>>>> 4359ccc (Made Book order pages)
