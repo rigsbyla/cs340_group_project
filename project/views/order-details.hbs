@@ -8,8 +8,6 @@
     <thead>
         {{! For the table header row, we print the DB attribute names }}
         <tr>
-            <th>Book Order ID</th>
-            <th>Order ID</th>
             <th>Book Title</th>
             <th>Quantity</th>
             <th>Checked Out To</th>
@@ -23,8 +21,7 @@
         {{! For each row, print the id, first_name, last_name, homeworld and age }}
         {{#each orderdetail}}
         <tr>
-            <td>{{this.book_order_id}}</td>
-            <td>{{this.order_id}}</td>
+ 
             <td>{{this.book_title}}</td>
             <td>{{this.quantity}}</td>
             <td>{{this.member_name}}</td>

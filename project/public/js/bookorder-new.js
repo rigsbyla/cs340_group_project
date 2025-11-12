@@ -53,7 +53,7 @@ document.getElementById('create_new_order').addEventListener('submit', async fun
         
         if (response.ok) {
             alert('Order created successfully!');
-            window.location.href = '/orders'; // Redirect to orders page
+            window.location.href = '/order-details'; // Redirect to orders page
         } else {
             const error = await response.json();
             alert('Error creating order: ' + (error.error || 'Unknown error'));

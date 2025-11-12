@@ -18,7 +18,7 @@ SELECT BookOrders.book_order_id,
         CONCAT(Members.first_name , ' ', Members.last_name) AS member_name
         FROM BookOrders
         INNER JOIN Books ON BookOrders.book_id = Books.book_id
-        INNER JOIN Orders ON BookOrders.order_id = Orders.member_id
+        INNER JOIN Orders ON BookOrders.order_id = Orders.order_id
         LEFT JOIN Members ON Members.member_id = Orders.member_id;
 
 -- Get all books

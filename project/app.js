@@ -206,7 +206,7 @@ app.get('/order-details', async function (req, res) {
         CONCAT(Members.first_name , ' ', Members.last_name) AS member_name
         FROM BookOrders
         INNER JOIN Books ON BookOrders.book_id = Books.book_id
-        INNER JOIN Orders ON BookOrders.order_id = Orders.member_id
+        INNER JOIN Orders ON BookOrders.order_id = Orders.order_id
         LEFT JOIN Members ON Members.member_id = Orders.member_id;`;
         const [orderdetail] = await db.query(query1);
         res.render('order-details', { orderdetail: orderdetail }); // Render the home.hbs file
