@@ -1,16 +1,34 @@
 <h1><img src="/images/books.png" alt="Books Icon" style="width:50px; height:auto;"> 
 All Books    
 </h1>
+
+<h2>Add a Book</h2>
+{{! CREATE form }}
+<form class='cuForm' id='create_book_form'>
+    <label for='create_book_title'>Title: </label>
+    <input type='text' name='create_book_title' id='create_book_title' required />
+    <label for='create_book_call_num'>Call Number: </label>
+    <input type='text' name='create_book_call_num' id='create_book_call_num' maxlength='6' required />
+    <label for='create_book_quantity'>Quantity: </label>
+    <input type='number' name='create_book_quantity' id='create_book_quantity' min='0' value='1' required />
+    <input type='submit' />
+</form>
+
+<br><br>
 {{! READ table }}
 <table>
     <thead>
         {{! For the table header row, we print the DB attribute names }}
         <tr>
-            {{#each books.[0]}}
-            <th>
-                {{@key}}
+            
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Call Number</th>
+            <th>Quantity</th>    
             </th>
-            {{/each}}
+          
             <th></th>
         </tr>
     </thead>
@@ -20,6 +38,8 @@ All Books
         <tr>
             <td>{{this.book_id}}</td>
             <td>{{this.title}}</td>
+            <td>{{this.author}}</td>
+            <td>{{this.genre}}</td>
             <td>{{this.call_num}}</td>
             <td>{{this.quantity}}</td>
             {{! DELETE form }}
@@ -38,17 +58,7 @@ All Books
         {{/each}}
     </tbody>
 </table>
-<h2>Add a Book</h2>
-{{! CREATE form }}
-<form class='cuForm' id='create_book_form'>
-    <label for='create_book_title'>Title: </label>
-    <input type='text' name='create_book_title' id='create_book_title' required />
-    <label for='create_book_call_num'>Call Number: </label>
-    <input type='text' name='create_book_call_num' id='create_book_call_num' maxlength='6' required />
-    <label for='create_book_quantity'>Quantity: </label>
-    <input type='number' name='create_book_quantity' id='create_book_quantity' min='0' value='1' required />
-    <input type='submit' />
-</form>
+
 <h2>Update a Book</h2>
 {{! UPDATE form }}
 <form class='cuForm' id='update_book_form'>

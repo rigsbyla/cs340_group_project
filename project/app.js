@@ -39,7 +39,19 @@ app.get('/', async function (req, res) {
 app.get('/books', async function (req, res) {
     try {
         // Create and execute our queries
-        const query1 = 'SELECT * FROM Books;';
+        const query1 = `
+        SELECT Books.book_id, 
+        Books.title, 
+        Books.call_num, 
+        Books.quantity, 
+        Authors.author_name as author,
+        Genres.genre_name as genre
+        FROM Books
+        INNER JOIN BookAuthors ON BookAuthors.book_id = Books.book_id
+        INNER JOIN Authors ON Authors.author_id = BookAuthors.author_id
+        INNER JOIN BookGenres ON BookGenres.book_id = Books.book_id
+        INNER JOIN Genres ON Genres.genre_id = BookGenres.genre_id
+        ;`;
         const [books] = await db.query(query1);
         
         res.render('books', {books: books}); // Render the home.hbs file

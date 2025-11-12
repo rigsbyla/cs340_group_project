@@ -22,7 +22,18 @@ SELECT BookOrders.book_order_id,
         LEFT JOIN Members ON Members.member_id = Orders.member_id;
 
 -- Get all books
-SELECT * FROM Books; 
+SELECT Books.book_id, 
+        Books.title, 
+        Books.call_num, 
+        Books.quantity, 
+        Authors.author_name as author,
+        Genres.genre_name as genre
+        FROM Books
+        INNER JOIN BookAuthors ON BookAuthors.book_id = Books.book_id
+        INNER JOIN Authors ON Authors.author_id = BookAuthors.author_id
+        INNER JOIN BookGenres ON BookGenres.book_id = Books.book_id
+        INNER JOIN Genres ON Genres.genre_id = BookGenres.genre_id
+        ; 
 
 --Get information about books for book orders
 SELECT book_id, title, quantity FROM Books;
