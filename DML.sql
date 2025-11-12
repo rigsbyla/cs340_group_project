@@ -33,3 +33,11 @@ INSERT INTO Orders (member_id, order_date, due_date) VALUES (?, ?, ?);
 -- Insert new book orders
 INSERT INTO BookOrders (order_id, book_id, quantity) VALUES (?, ?, ?);
 
+-- Delete a member
+DELETE FROM Members WHERE member_id = delete_member_id;
+
+-- Delete an order
+DELETE FROM BookOrders WHERE book_order_id = delete_book_order_id;
+
+-- Delete a book
+DELETE FROM Books WHERE book_id = delete_book_id;
