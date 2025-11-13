@@ -292,6 +292,18 @@ app.post('/book-order-delete', async function (req, res) {
         res.status(500).send('An error occurred while deleting the book.');
     }
 });
+// UPDATE book quantity
+app.post('/books-update-quantity', async function (req, res) {
+    try {
+        const { book_id, quantity } = req.body;
+        const query = 'UPDATE Books SET quantity = ? WHERE book_id = ?';
+        await db.query(query, [quantity, book_id]);
+        res.status(200).json({ message: 'Quantity updated successfully' });
+    } catch (error) {
+        console.error('Error updating book quantity:', error);
+        res.status(500).json({ error: 'An error occurred while updating the book quantity.' });
+    }
+});
 
 
 // Reset database for testing
