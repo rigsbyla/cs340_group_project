@@ -44,6 +44,12 @@ INSERT INTO Orders (member_id, order_date, due_date) VALUES (?, ?, ?);
 -- Insert new book orders
 INSERT INTO BookOrders (order_id, book_id, quantity) VALUES (?, ?, ?);
 
+-- Update Memeber
+Update Members SET first_name = ?, last_name = ?, address = ?, email = ?, phone_number = ?, fee_total = ? WHERE member_id = ?;
+
+--Update Books
+UPDATE Books SET quantity = ? WHERE book_id = ?;
+
 -- Delete a member
 DELETE FROM Members WHERE member_id = delete_member_id;
 
