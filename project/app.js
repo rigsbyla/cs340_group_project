@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-const PORT = 3999;
+const PORT = 3998;
 
 // Database
 const db = require('./database/db-connector');
@@ -75,6 +75,29 @@ app.post('/books-delete', async function (req, res) {
     } catch (error) {
         console.error('Error deleting book:', error);
         res.status(500).send('An error occurred while deleting the book.');
+    }
+});
+
+// add a new book using stored procedure
+app.post('/books-new', async function (req, res) {
+    try {
+        const { book_title, book_call_num, book_quantity, author_names, genre_names } = req.body;
+
+        await db.execute(
+            `CALL add_book_with_author_genre(?, ?, ?, ?, ?)`,
+            [
+                book_title,
+                book_call_num,
+                book_quantity,
+                author_names,
+                genre_names
+            ]
+    );
+        res.redirect('/books');
+
+    } catch (error) {
+        console.error('Error inserting book:', error);
+        res.status(500).send('An error occurred while inserting the book.');
     }
 });
 
