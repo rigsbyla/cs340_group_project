@@ -46,6 +46,59 @@ BEGIN
 END
 
 
+DROP PROCEDURE add_book_with_author_genre;
+CREATE DEFINER=`cs340_rigsbyla`@`%` PROCEDURE `add_book_with_author_genre`(
+    IN  p_title       VARCHAR(145),
+    IN  p_call_num    CHAR(6),
+    IN  p_quantity    INT,
+    IN  p_author_name VARCHAR(45),
+    IN  p_genre_name  VARCHAR(45)
+)
+BEGIN
+    DECLARE v_author_id INT;
+    DECLARE v_genre_id  INT;
+
+    -- Look up author; create if not found
+    SELECT author_id
+      INTO v_author_id
+      FROM Authors
+     WHERE author_name = p_author_name
+     LIMIT 1;
+
+    IF v_author_id IS NULL THEN
+        INSERT INTO Authors (author_name)
+        VALUES (p_author_name);
+        SET v_author_id = LAST_INSERT_ID();
+    END IF;
+
+    -- Look up genre; create if not found
+    SELECT genre_id
+      INTO v_genre_id
+      FROM Genres
+     WHERE genre_name = p_genre_name
+     LIMIT 1;
+
+    IF v_genre_id IS NULL THEN
+        INSERT INTO Genres (genre_name)
+        VALUES (p_genre_name);
+        SET v_genre_id = LAST_INSERT_ID();
+    END IF;
+
+    -- Create the new book
+    INSERT INTO Books (title, call_num, quantity)
+    VALUES (p_title, p_call_num, p_quantity);
+
+    SET @new_book_id = LAST_INSERT_ID();
+
+    -- Link book to author
+    INSERT INTO BookAuthors (book_id, author_id)
+    VALUES (@new_book_id, v_author_id);
+
+    -- Link book to genre
+    INSERT INTO BookGenres (book_id, genre_id)
+    VALUES (@new_book_id, v_genre_id);
+END
+
 DROP PROCEDURE load_librarydb;
 CREATE DEFINER=`cs340_rigsbyla`@`%` PROCEDURE `load_librarydb`()
 BEGIN
