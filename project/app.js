@@ -270,6 +270,8 @@ app.get('/bookorders-new', async function (req, res) {
         res.status(500).send('An error occurred while rendering the page.');
     }
 });
+
+
 app.post('/bookorders-new', async function (req, res) {
     const connection = await db.getConnection();
     
@@ -288,10 +290,13 @@ app.post('/bookorders-new', async function (req, res) {
         const quantities = Array.isArray(quantity) ? quantity : [quantity];
         
         for (let i = 0; i < bookIds.length; i++) {
+            const bookCheck = await connection.query('SELECT quantity FROM Books WHERE book_id = ?', [bookIds[i]]);
+            if (bookCheck[0][0].quantity < quantities[i]) {
+                throw new Error(`This book is out of stock. We will try to get it back soon!`);
+            }
             const bookOrderQuery = 'INSERT INTO BookOrders (order_id, book_id, quantity) VALUES (?, ?, ?)';
             await connection.query(bookOrderQuery, [orderId, bookIds[i], quantities[i]]);
             await connection.query('UPDATE Books SET quantity = quantity - ? WHERE book_id = ?', [quantities[i], bookIds[i]]);
-
         }
         
         await connection.commit();
@@ -300,12 +305,11 @@ app.post('/bookorders-new', async function (req, res) {
     } catch (error) {
         await connection.rollback();
         console.error('Error creating order:', error);
-        res.status(500).json({ error: 'An error occurred while creating the order.' });
+        res.status(500).json({ error: error.message || 'An error occurred while creating the order.' });
     } finally {
         connection.release();
     }
 });
-
 
 app.post('/book-order-delete', async function (req, res) {
     try {
