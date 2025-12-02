@@ -312,7 +312,7 @@ app.post('/book-order-delete', async function (req, res) {
         const {delete_book_order_id} = req.body;
         // Get order details before returning
         const [bookOrder] = await db.query(`
-            SELECT o.order_id, o.member_id, o.due_date 
+            SELECT o.order_id, o.member_id, o.due_date, bo.book_id, bo.quantity
             FROM BookOrders bo
             INNER JOIN Orders o ON bo.order_id = o.order_id
             WHERE bo.book_order_id = ?
@@ -325,6 +325,7 @@ app.post('/book-order-delete', async function (req, res) {
                 const lateFee = daysLate * .5;
                 await db.query('UPDATE Members SET fee_total = fee_total + ? WHERE member_id = ?', [lateFee, bookOrder[0].member_id]);
             }
+            await db.query('UPDATE Books SET quantity = quantity + ? WHERE book_id = ?', [bookOrder[0].quantity, bookOrder[0].book_id]);
         }
 
         const [rows] = await db.query(
