@@ -290,6 +290,8 @@ app.post('/bookorders-new', async function (req, res) {
         for (let i = 0; i < bookIds.length; i++) {
             const bookOrderQuery = 'INSERT INTO BookOrders (order_id, book_id, quantity) VALUES (?, ?, ?)';
             await connection.query(bookOrderQuery, [orderId, bookIds[i], quantities[i]]);
+            await connection.query('UPDATE Books SET quantity = quantity - ? WHERE book_id = ?', [quantities[i], bookIds[i]]);
+
         }
         
         await connection.commit();
