@@ -304,9 +304,27 @@ app.post('/bookorders-new', async function (req, res) {
     }
 });
 
+
 app.post('/book-order-delete', async function (req, res) {
     try {
         const {delete_book_order_id} = req.body;
+        // Get order details before returning
+        const [bookOrder] = await db.query(`
+            SELECT o.order_id, o.member_id, o.due_date 
+            FROM BookOrders bo
+            INNER JOIN Orders o ON bo.order_id = o.order_id
+            WHERE bo.book_order_id = ?
+        `, [delete_book_order_id]);
+        if (bookOrder.length > 0) {
+            const dueDate = bookOrder[0].due_date;
+            const currentDate = new Date();
+            const daysLate = Math.max(0, Math.floor((currentDate - dueDate) / (1000 * 60 * 60 * 24)));
+            if (daysLate > 0) {
+                const lateFee = daysLate * .5;
+                await db.query('UPDATE Members SET fee_total = fee_total + ? WHERE member_id = ?', [lateFee, bookOrder[0].member_id]);
+            }
+        }
+
         const [rows] = await db.query(
             'CALL delete_book_order(?)',
             [delete_book_order_id]           
