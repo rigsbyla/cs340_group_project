@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-const PORT = 3999;
+const PORT = 3998;
 
 // Database
 const db = require('./database/db-connector');
@@ -240,13 +240,21 @@ app.get('/order-details', async function (req, res) {
         BookOrders.order_id, 
         Books.title AS book_title, 
         BookOrders.quantity, 
-        CONCAT(Members.first_name , ' ', Members.last_name) AS member_name
+        CONCAT(Members.first_name , ' ', Members.last_name) AS member_name,
+        Orders.due_date AS due_date
         FROM BookOrders
         INNER JOIN Books ON BookOrders.book_id = Books.book_id
         INNER JOIN Orders ON BookOrders.order_id = Orders.order_id
         LEFT JOIN Members ON Members.member_id = Orders.member_id;`;
         const [orderdetail] = await db.query(query1);
         res.render('order-details', { orderdetail: orderdetail }); // Render the home.hbs file
+
+
+                // Format Dates
+        orderdetail.forEach(o => {
+            o.due_date = o.due_date.toISOString().split('T')[0];
+        });
+
     } catch (error) {
         console.error('Error rendering page:', error);
         // Send a generic error message to the browser
