@@ -20,6 +20,43 @@ document.getElementById('add_book_btn').addEventListener('click', function() {
     booksContainer.appendChild(newBookItem);
 });
 
+// Auto-calculate due date based on order date
+document.addEventListener("DOMContentLoaded", () => {
+  const orderDateInput = document.getElementById("order_date");
+  const dueDateInput = document.getElementById("due_date");
+
+
+  function formatDateToInput(d) {
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function updateDueDate() {
+    if (!orderDateInput.value) {
+      dueDateInput.value = "";
+      return;
+    }
+
+    const orderDate = new Date(orderDateInput.value);
+    if (isNaN(orderDate)) return;
+    orderDate.setDate(orderDate.getDate() + 14);
+    dueDateInput.value = formatDateToInput(orderDate);
+  }
+
+  // Default order date to today when page loads
+  if (!orderDateInput.value) {
+    const today = new Date();
+    orderDateInput.value = formatDateToInput(today);
+  }
+  updateDueDate();
+
+  // Recalculate whenever order date changes
+  orderDateInput.addEventListener("change", updateDueDate);
+});
+
+
 // Remove book item (event delegation for dynamically added buttons)
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('remove_book_btn')) {
