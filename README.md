@@ -1,10 +1,10 @@
--Make the template-LR DONE
--Member page- LR
--Books- MP
--Transactions
--- check out book page
-  
+Citations
 
+Website images (11/04/2025) taken from https://www.flaticon.com/packs/bookworm-3
 
--Stretch Goals
-- look up by author or genre
+Citation for bookorder-new.js:
+Date: 12/4/25
+If AI tools were used:
+Used ChatGPT assist in writing the auto-calculation of due date based on order date.  
+
+All other work is our own. 
