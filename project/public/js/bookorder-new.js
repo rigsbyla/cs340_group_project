@@ -1,3 +1,8 @@
+// Citation for the following code:
+// Date: 12/4/25
+//If AI tools were used:
+//Used ChatGPT assist in writing the auto-calculation of due date based on order date.  
+
 let bookCounter = 1;
 
 // Add another book to the order
